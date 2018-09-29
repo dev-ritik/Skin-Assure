@@ -5,105 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.otaliastudios.cameraview.CameraView
-        android:id="@+id/camera"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:keepScreenOn="true" />
-
-
-    <TextView
-        android:id="@+id/zoomAmount"
+    <FrameLayout android:id="@+id/listFragment"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/frameButtom"
-        android:text="Zoom 1x"
-        android:textColor="@color/colorAccent" />
-
-    <Button
-        android:layout_below="@+id/frameTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="test"
-        android:text="test" />
- <Button
-        android:layout_below="@+id/frameTop"
-     android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="test1"
-        android:text="test1" />
-
-
-    <LinearLayout
-        android:id="@+id/frameTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        >
-
-        <SeekBar
-            android:layout_margin="15dp"
-            android:padding="2dp"
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:alpha="0.6"
-            app:srcCompat="@drawable/round_flash_auto_white_36"/>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:background="@color/white"
-        android:alpha="0.8"
-        android:id="@+id/frameButtom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:translationY="80dp">
-
-        <ImageButton
-            android:id="@+id/galleryImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:alpha="0.5"
-            android:background="@drawable/round_button"
-            android:backgroundTint="@color/colorAccent"
-            android:onClick="galleryImage"
-            android:padding="10dp" />
-
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="5dp"
-            android:alpha="0.5"
-            android:background="@drawable/round_button"
-            android:onClick="capture"
-            android:padding="10dp" />
-
-        <ImageButton
-            android:id="@+id/uploadImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="5dp"
-            android:alpha="0.5"
-            android:background="@android:color/transparent"
-            android:onClick="uploadImage"
-            android:padding="10dp"
-            android:src="@drawable/round_arrow_upward_white_24" />
-
-    </RelativeLayout>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
