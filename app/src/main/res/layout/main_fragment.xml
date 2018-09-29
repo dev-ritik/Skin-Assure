@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.otaliastudios.cameraview.CameraView
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        app:cameraFlash="auto" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameTop"
+        android:text="test" />
+
+    <LinearLayout
+        android:id="@+id/frameTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:padding="2dp" />
+
+        <ImageButton
+            android:id="@+id/flash"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="0.6"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/round_flash_auto_white_36" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/flashTray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameTop"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/flashOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@android:color/transparent"
+            android:padding="2dp"
+            app:srcCompat="@drawable/round_flash_off_white_36" />
+
+        <ImageButton
+            android:id="@+id/flashAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@android:color/transparent"
+            android:padding="2dp"
+            app:srcCompat="@drawable/round_flash_auto_white_36" />
+
+        <ImageButton
+            android:id="@+id/flashOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@android:color/transparent"
+            android:padding="2dp"
+            app:srcCompat="@drawable/round_flash_on_white_36" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/frameButtom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.8"
+        android:background="@color/white_grey"
+        android:translationY="80dp">
+
+        <ImageButton
+            android:id="@+id/galleryImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/baseline_insert_photo_white_36" />
+
+        <Button
+            android:id="@+id/capture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_button"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:id="@+id/switchCamera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/baseline_switch_camera_white_36" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -4,11 +4,13 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "io.github.dev_ritik.skinassure"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
     }
     buildTypes {
         release {
@@ -26,4 +28,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.otaliastudios:cameraview:1.6.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
+
 }
