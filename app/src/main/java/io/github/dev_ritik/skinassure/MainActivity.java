@@ -3,8 +3,10 @@ package io.github.dev_ritik.skinassure;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -13,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,9 +33,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int GALLERY_RESULT2 = 2;
     CameraView camera;
     ImageView image;
-    RelativeLayout frame;
+    RelativeLayout frameBottom;
+    ImageButton galleryImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-            //ask for authorisation
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 50);
         else {
             camera = findViewById(R.id.camera);
             camera.setLifecycleOwner(this);
             image = findViewById(R.id.image);
-            frame = findViewById(R.id.frame);
+            frameBottom = findViewById(R.id.frameButtom);
+            galleryImage = findViewById(R.id.galleryImage);
 
             camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM); // Pinch to zoom!
             camera.mapGesture(Gesture.TAP, GestureAction.FOCUS_WITH_MARKER); // Tap to focus!
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                  */
                 @Override
                 public void onZoomChanged(float newValue, float[] bounds, PointF[] fingers) {
+                    Log.i("point 143", "zoom"+newValue);
                 }
 
                 /**
@@ -170,6 +176,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_RESULT2) {
+            if (resultCode == RESULT_OK) {
+
+                Uri selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    Intent myIntent = new Intent(MainActivity.this, ImageActivity.class);
+                    myIntent.putExtra("Uri", selectedImageUri.toString()); //Optional parameters
+                    startActivity(myIntent);
+                }
+
+            } else {
+                Toast.makeText(this, "error in getting picture", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
@@ -223,14 +250,19 @@ public class MainActivity extends AppCompatActivity {
 
     private File getOutputMediaFile() {
         String state = Environment.getExternalStorageState();
-        if (!state.equals(Environment.MEDIA_MOUNTED))
+        if (!state.equals(Environment.MEDIA_MOUNTED)) {
+            Toast.makeText(this, "failed to write data!", Toast.LENGTH_SHORT).show();
             return null;
-        else {
+        } else {
             File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
             if (!folder_gui.exists()) {
                 folder_gui.mkdir();
             }
             File outputFile = new File(folder_gui, "temp.jpg");
+//            Log.i("point 261", "" + Uri.fromFile(outputFile));
+            Intent myIntent = new Intent(MainActivity.this, ImageActivity.class);
+            myIntent.putExtra("Uri", Uri.fromFile(outputFile).toString());
+            startActivity(myIntent);
 
             return outputFile;
         }
@@ -238,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void amimFrame() {
         ObjectAnimator settleAnimator = new ObjectAnimator();
-        settleAnimator = ObjectAnimator.ofFloat(frame, "translationY", 150);
+        settleAnimator = ObjectAnimator.ofFloat(frameBottom, "translationY", 150);
         settleAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -273,6 +305,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void test(View view) {
         amimFrame();
+    }
+
+    public void uploadImage(View view) {
+    }
+
+    public void galleryImage(View view) {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/jpeg");
+        startActivityForResult(intent, GALLERY_RESULT2);
     }
 }
 
