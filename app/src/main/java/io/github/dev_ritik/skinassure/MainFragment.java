@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.otaliastudios.cameraview.CameraException;
 import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraOptions;
 import com.otaliastudios.cameraview.CameraView;
+import com.otaliastudios.cameraview.Facing;
 import com.otaliastudios.cameraview.Flash;
 import com.otaliastudios.cameraview.Gesture;
 import com.otaliastudios.cameraview.GestureAction;
@@ -152,6 +154,7 @@ public class MainFragment extends Fragment {
                  */
                 @Override
                 public void onFocusStart(PointF point) {
+                    animFrame();
                 }
 
                 /**
@@ -181,6 +184,7 @@ public class MainFragment extends Fragment {
                 }
 
             });
+
 
             camera.addCameraListener(new CameraListener() {
                 @Override
@@ -213,7 +217,7 @@ public class MainFragment extends Fragment {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                amimFrame();
+                animFrame();
             }
         });
         Button capture = root.findViewById(R.id.capture);
@@ -264,6 +268,17 @@ public class MainFragment extends Fragment {
                 changeFlash(R.drawable.round_flash_off_white_36, Flash.OFF);
             }
         });
+        ImageButton switchCamera = root.findViewById(R.id.switchCamera);
+        switchCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (camera.getFacing() == Facing.FRONT)
+                    camera.setFacing(Facing.BACK);
+                else
+                    camera.setFacing(Facing.FRONT);
+
+            }
+        });
 
         camera.start();
         return root;
@@ -292,12 +307,7 @@ public class MainFragment extends Fragment {
                     args.putString("Uri", selectedImageUri.toString());
                     cropFragment.setArguments(args);
 
-//Inflate the fragment
                     getFragmentManager().beginTransaction().replace(R.id.listFragment, cropFragment).commit();
-
-//                    Intent myIntent = new Intent(MainActivity.this, ImageActivity.class);
-//                    myIntent.putExtra("Uri", selectedImageUri.toString()); //Optional parameters
-//                    startActivity(myIntent);
                 }
 
             } else {
@@ -339,11 +349,6 @@ public class MainFragment extends Fragment {
                 folder_gui.mkdir();
             }
             File outputFile = new File(folder_gui, "temp.jpg");
-//            Log.i("point 261", "" + Uri.fromFile(outputFile));
-//            Intent myIntent = new Intent(MainActivity.this, ImageActivity.class);
-//            myIntent.putExtra("Uri", Uri.fromFile(outputFile).toString());
-//            startActivity(myIntent);
-
             Crop cropFragment = new Crop();
 
             Bundle args = new Bundle();
@@ -357,7 +362,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public void amimFrame() {
+    public void animFrame() {
         ObjectAnimator settleAnimator = ObjectAnimator.ofFloat(frameBottom, "translationY", 150);
         settleAnimator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -383,7 +388,7 @@ public class MainFragment extends Fragment {
         });
 
 
-        settleAnimator.setDuration(500);//millisec
+        settleAnimator.setDuration(400);//millisec
 
 //this will take start value and end value in pixels ie. (from, to)
         settleAnimator.setFloatValues(+300, 0);
@@ -391,8 +396,16 @@ public class MainFragment extends Fragment {
 
     }
 
-    public void uploadImage(View view) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
 }
 

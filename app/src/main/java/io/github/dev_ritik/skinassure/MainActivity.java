@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 // add
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.listFragment, new MainFragment());
-// alternatively add it with a tag
-// trx.add(R.id.your_placehodler, new YourFragment(), "detail");
         ft.commit();
 
     }

@@ -20,16 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/frameTop"
-
         android:text="test" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/frameTop"
-        android:layout_marginTop="50dp"
-        android:text="test1" />
-
 
     <LinearLayout
         android:id="@+id/frameTop"
@@ -97,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:alpha="0.8"
-        android:background="@color/white"
+        android:background="@color/white_grey"
         android:translationY="80dp">
 
         <ImageButton
@@ -105,9 +96,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:alpha="0.5"
-            android:background="@drawable/round_button"
-            android:backgroundTint="@color/colorAccent"
+            android:src="@drawable/baseline_insert_photo_white_24"
             android:padding="10dp" />
 
         <Button
@@ -116,20 +105,18 @@
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_margin="5dp"
-            android:alpha="0.5"
             android:background="@drawable/round_button"
             android:padding="10dp" />
 
         <ImageButton
-            android:id="@+id/uploadImage"
+            android:id="@+id/switchCamera"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_margin="5dp"
-            android:alpha="0.5"
             android:background="@android:color/transparent"
             android:padding="10dp"
-            android:src="@drawable/round_arrow_upward_white_24" />
+            android:src="@drawable/baseline_switch_camera_white_24" />
 
     </RelativeLayout>
 
