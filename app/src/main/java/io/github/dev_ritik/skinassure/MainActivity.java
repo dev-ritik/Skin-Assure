@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 // add
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.listFragment, new MainFragment());
+        ft.add(R.id.mainFrame, new MainFragment()).addToBackStack( "tag" );
         ft.commit();
 
     }

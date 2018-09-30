@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout android:id="@+id/listFragment"
+    <FrameLayout android:id="@+id/mainFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

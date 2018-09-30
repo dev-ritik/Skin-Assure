@@ -35,11 +35,16 @@ import com.otaliastudios.cameraview.Facing;
 import com.otaliastudios.cameraview.Flash;
 import com.otaliastudios.cameraview.Gesture;
 import com.otaliastudios.cameraview.GestureAction;
+import com.otaliastudios.cameraview.Size;
+import com.otaliastudios.cameraview.SizeSelector;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -242,7 +247,6 @@ public class MainFragment extends Fragment {
         flash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("point 240", "flash");
                 if (flashTray.getVisibility() == View.VISIBLE) flashTray.setVisibility(View.GONE);
                 else flashTray.setVisibility(View.VISIBLE);
             }
@@ -280,7 +284,25 @@ public class MainFragment extends Fragment {
             }
         });
 
-        camera.start();
+        camera.setPictureSize(new SizeSelector() {
+            @Override
+            public List<Size> select(List<Size> source) {
+                //TODO image degraded
+                // Receives a list of available sizes.
+                // Must return a list of acceptable sizes.
+                List<Size> newList=new ArrayList<>();
+                Log.i("point 240", "size" + source.size());
+                for (Size s : source) {
+                    if (s.getHeight() < 1000 || s.getWidth() < 1000) {
+                        newList.add(s);
+                    }
+                    Log.i("point", "size" + s.toString());
+                }
+                Log.i("point 304", "size new" + newList.size());
+
+                return newList;
+            }
+        });
         return root;
 
     }
@@ -307,7 +329,7 @@ public class MainFragment extends Fragment {
                     args.putString("Uri", selectedImageUri.toString());
                     cropFragment.setArguments(args);
 
-                    getFragmentManager().beginTransaction().replace(R.id.listFragment, cropFragment).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.mainFrame, cropFragment).addToBackStack("h").commit();
                 }
 
             } else {
@@ -344,18 +366,18 @@ public class MainFragment extends Fragment {
             Toast.makeText(getActivity(), "failed to write data!", Toast.LENGTH_SHORT).show();
             return null;
         } else {
-            File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
+            File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "SkinAssure");
             if (!folder_gui.exists()) {
                 folder_gui.mkdir();
             }
-            File outputFile = new File(folder_gui, "temp.jpg");
+            File outputFile = new File(folder_gui, "original.jpg");
             Crop cropFragment = new Crop();
 
             Bundle args = new Bundle();
             args.putString("Uri", Uri.fromFile(outputFile).toString());
             cropFragment.setArguments(args);
 
-            getFragmentManager().beginTransaction().replace(R.id.listFragment, cropFragment).commit();
+            getFragmentManager().beginTransaction().add(R.id.mainFrame, cropFragment).addToBackStack("gh").commit();
 
 
             return outputFile;
@@ -397,15 +419,10 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-    }
+    public void onStart() {
+        super.onStart();
+        camera.start();
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }
 

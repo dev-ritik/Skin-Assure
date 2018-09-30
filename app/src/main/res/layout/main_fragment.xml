@@ -12,8 +12,8 @@
         android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cameraFlash="auto"
-        android:keepScreenOn="true" />
+        android:keepScreenOn="true"
+        app:cameraFlash="auto" />
 
     <Button
         android:id="@+id/test"
@@ -96,8 +96,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:src="@drawable/baseline_insert_photo_white_24"
-            android:padding="10dp" />
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/baseline_insert_photo_white_36" />
 
         <Button
             android:id="@+id/capture"
@@ -116,7 +117,7 @@
             android:layout_margin="5dp"
             android:background="@android:color/transparent"
             android:padding="10dp"
-            android:src="@drawable/baseline_switch_camera_white_24" />
+            android:src="@drawable/baseline_switch_camera_white_36" />
 
     </RelativeLayout>
 
