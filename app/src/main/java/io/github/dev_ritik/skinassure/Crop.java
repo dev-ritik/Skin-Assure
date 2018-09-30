@@ -51,6 +51,18 @@ public class Crop extends Fragment {
         return inSampleSize;
     }
 
+    public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
+
+        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
+
+        int height = (int) (newHeight );
+        int width = (int) (height * photo.getWidth() / ((double) photo.getHeight()));
+
+        photo = Bitmap.createScaledBitmap(photo, newHeight, newHeight, true);
+
+        return photo;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,12 +89,14 @@ public class Crop extends Fragment {
 
                     Uri croppedUri = bitmapToUriConverter(cropped);
                     Log.i("point 79", croppedUri + "");
-
+                   cropped= scaleDownBitmap(cropped, 128, getActivity());
+                    Log.i("point 93", cropped.toString() + " " + cropped.getWidth() + " " + cropped.getHeight() + " " + cropped.getDensity());
+                    Log.i("point 94", cropped.getByteCount() + "");
                     //TODO size
                     Intent intent = new Intent(getActivity(), ServerActivity.class);
-//                    intent.putExtra("bitmap", cropped);
+                    intent.putExtra("bitmap", cropped);
 
-                    intent.putExtra("croppedUri", croppedUri);
+//                    intent.putExtra("croppedUri", croppedUri);
 
                     startActivity(intent);
                 }

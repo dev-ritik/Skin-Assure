@@ -18,7 +18,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,10 +36,10 @@ dependencies {
     implementation 'com.otaliastudios:cameraview:1.6.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
-    implementation 'com.google.firebase:firebase-core:16.0.3'
+    compile 'org.tensorflow:tensorflow-lite:1.10.0'
 
 
-    implementation 'com.google.firebase:firebase-ml-model-interpreter:16.2.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
