@@ -15,12 +15,12 @@
         android:keepScreenOn="true"
         app:cameraFlash="auto" />
 
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/frameTop"
-        android:text="test" />
+    <!--<Button-->
+        <!--android:id="@+id/test"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/frameTop"-->
+        <!--android:text="test" />-->
 
     <LinearLayout
         android:id="@+id/frameTop"

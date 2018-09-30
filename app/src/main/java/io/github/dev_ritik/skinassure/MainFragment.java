@@ -14,7 +14,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +42,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -218,13 +216,14 @@ public class MainFragment extends Fragment {
 
         }
 
-        Button test = root.findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animFrame();
-            }
-        });
+//        Button test = root.findViewById(R.id.test);
+//        test.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                animFrame();
+//            }
+//        });
+
         Button capture = root.findViewById(R.id.capture);
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -290,7 +289,7 @@ public class MainFragment extends Fragment {
                 //TODO image degraded
                 // Receives a list of available sizes.
                 // Must return a list of acceptable sizes.
-                List<Size> newList=new ArrayList<>();
+                List<Size> newList = new ArrayList<>();
                 Log.i("point 240", "size" + source.size());
                 for (Size s : source) {
                     if (s.getHeight() < 1000 || s.getWidth() < 1000) {
