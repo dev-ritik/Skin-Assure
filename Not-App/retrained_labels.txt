@@ -1,0 +1,10 @@
+basal cell carcinoma
+lentigo
+malignant melanoma
+seborrheic keratosis
+skin
+wart
+dermatofibroma
+hemangioma
+nevus
+pyogenic granuloma
