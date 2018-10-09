@@ -17,5 +17,5 @@ to Machine Learning model using TensorFlow and to detect 10 skin diseases which 
 
 ## Credits
 For making the android app, following libraries are used:
-* [CameraView](https://github.com/natario1/CameraView#camerafacing)
+* [CameraView](https://github.com/natario1/CameraView)
 * [Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper)
